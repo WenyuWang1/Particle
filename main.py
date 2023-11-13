@@ -1,17 +1,7 @@
-# This is a sample Python script.
-
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
-"""
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    #print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
-"""
-
 import socket
 import time
 import openpyxl
+import datetime
 
 # Configuration
 # HOST = '172.20.10.7'
@@ -25,9 +15,16 @@ ws = wb.active
 
 
 def save_to_excel(row_data, row_num):
+    # Convert the raw bytes to a string of hexadecimal values
+    hex_data = ' '.join(f'{byte:02x}' for byte in row_data)
+
+    # Get current time
+    # current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
     # Write binary data to the specified row
-    ws.cell(row = row_num, column = 1).value = str(row_data)
-    wb.save('received_data.xlsx')
+    ws.cell(row=row_num, column=1).value = hex_data
+    # ws.cell(row=row_num, column=2).value = current_time
+    wb.save('DMA_inter_data_mode2.xlsx')
 
 
 def main():
@@ -58,5 +55,3 @@ if __name__ == "__main__":
 
 if __name__ == '__main__':
     print('Work done!')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
