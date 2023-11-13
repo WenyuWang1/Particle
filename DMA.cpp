@@ -206,7 +206,7 @@ void ADCDMA::start(size_t freqHZ) {
 	// Sample time equal to 3 cycles
 	Hal_Pin_Info* PIN_MAP = HAL_Pin_Map();
 	ADC_RegularChannelConfig(ADC1, PIN_MAP[pin].adc_channel, 1, ADC_SampleTime_15Cycles); 
-	//ADC_RegularChannelConfig(ADC2, PIN_MAP[pin].adc_channel, 1, ADC_SampleTime_15Cycles); 
+	ADC_RegularChannelConfig(ADC2, PIN_MAP[pin].adc_channel, 1, ADC_SampleTime_15Cycles); 
 
 	
 	// Enables the DMA request after the last transfer in multi-ADC mode. When multiple ADCs are operating in a combined mode (for example, regular simultaneous mode, interleaved mode, etc.), this setting ensures that the DMA request is only raised after the last ADC conversion in the sequence is complete
@@ -215,8 +215,7 @@ void ADCDMA::start(size_t freqHZ) {
 	// Enable ADCs
 	ADC_Cmd(ADC1, ENABLE);
 	ADC_Cmd(ADC2, ENABLE);
-	
-	// Enable ADC2 DMA since ADC1 is the master and will be triggered by the DMA
+
 	//ADC_DMACmd(ADC1, ENABLE);
     //ADC_DMACmd(ADC2, ENABLE);
 
